@@ -112,9 +112,10 @@ const hotVideo = defineSource(async () => {
 
 // Helper function for formatting numbers
 // Note: bilibili uses 10000 (万) as the unit threshold, not 1000
+// Using Math.round instead of Math.floor for more accurate display (e.g. 15000 -> 2w instead of 1w)
 function formatNumber(num: number): string {
   if (num >= 10000) {
-    return `${Math.floor(num / 10000)}w+`
+    return `${Math.round(num / 10000)}w+`
   }
   return num.toString()
 }
@@ -127,14 +128,4 @@ export default defineSource({
 })
 ```
 
-For completely new sources, create a new file in `/server/sources/` named after your source (e.g., `newsource.ts`).
-
-### 4. Test Your Source
-
-Before submitting, make sure to test your new source locally:
-
-```bash
-npm run dev
-```
-
-Verify that your source appears in the UI and that data is fetched correctly without errors in the console.
+For completely new sources, create a new f
