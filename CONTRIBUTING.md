@@ -111,6 +111,7 @@ const hotVideo = defineSource(async () => {
 })
 
 // Helper function for formatting numbers
+// Note: bilibili uses 10000 (万) as the unit threshold, not 1000
 function formatNumber(num: number): string {
   if (num >= 10000) {
     return `${Math.floor(num / 10000)}w+`
@@ -128,77 +129,12 @@ export default defineSource({
 
 For completely new sources, create a new file in `/server/sources/` named after your source (e.g., `newsource.ts`).
 
-### 4. Regenerate Source Files
+### 4. Test Your Source
 
-After adding or modifying source files, run the following command to regenerate the necessary files:
-
-```bash
-npm run presource
-```
-
-This will update the `sources.json` file and any other necessary configuration.
-
-### 5. Test Your Changes
-
-Start the development server to test your changes:
+Before submitting, make sure to test your new source locally:
 
 ```bash
 npm run dev
 ```
 
-Access the application in your browser and ensure that your new source is appearing and working correctly.
-
-### 6. Commit Your Changes
-
-Once everything is working, commit your changes:
-
-```bash
-git add .
-git commit -m "Add new source: source-name"
-```
-
-### 7. Create a Pull Request
-
-Push your changes to your fork and create a pull request against the main repository:
-
-```bash
-git push origin feature-name
-```
-
-## Source Structure
-
-### NewsItem Structure
-
-Each source should return an array of objects that conform to the `NewsItem` interface:
-
-```typescript
-interface NewsItem {
-  id: string | number // Unique identifier for the item
-  title: string // Title of the news item
-  url: string // URL to the full content
-  mobileUrl?: string // Optional mobile-specific URL
-  pubDate?: number | string // Publication date
-  extra?: {
-    hover?: string // Text to display on hover
-    date?: number | string // Formatted date
-    info?: false | string // Additional information
-    diff?: number // Time difference
-    icon?:
-      | false
-      | string
-      | {
-        // Icon for the item
-        url: string
-        scale: number
-      }
-  }
-}
-```
-
-## Code Style
-
-Please follow the existing code style in the project. The project uses TypeScript and follows modern ES6+ conventions.
-
-## License
-
-By contributing to this project, you agree that your contributions will be licensed under the project's license.
+Verify that your source appears in the UI and that data is fetched correctly without errors in the console.
