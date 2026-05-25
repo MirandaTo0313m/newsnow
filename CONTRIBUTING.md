@@ -113,6 +113,7 @@ const hotVideo = defineSource(async () => {
 // Helper function for formatting numbers
 // Note: bilibili uses 10000 (万) as the unit threshold, not 1000
 // Using Math.round instead of Math.floor for more accurate display (e.g. 15000 -> 2w instead of 1w)
+// Note: numbers below 10000 are returned as-is without any suffix
 function formatNumber(num: number): string {
   if (num >= 10000) {
     return `${Math.round(num / 10000)}w+`
@@ -124,8 +125,5 @@ function formatNumber(num: number): string {
 export default defineSource({
   "bilibili": hotSearch,
   "bilibili-hot-search": hotSearch,
-  "bilibili-hot-video": hotVideo, // Add your new source here
-})
+  "bilibili
 ```
-
-For completely new sources, create a new f
